@@ -1,0 +1,32 @@
+<p-tabMenu [model]="items" [activeItem]="activeItem"></p-tabMenu>
+
+<div class="card">
+    <p-dataView #dv [value]="beer" filterBy="name"
+  layout="grid">
+        <ng-template let-beer pTemplate="gridItem">
+            <div class="p-col-12 p-md-4 container">
+                <div class="product-grid-item card">
+                    <div class="product-grid-item-top">
+                        <div>
+                            <i class="pi pi-tag product-category-icon"></i>
+                            <span class="product-category">{{beer.name}}</span>
+                        </div>
+                        <span>{{beer.abv}}%</span>
+                    </div>
+                    <div class="product-grid-item-content">
+                        <div class="product-name"><h1>{{beer.name}}</h1></div>
+                        <div class="product-description">{{beer.description}}</div>
+                        <div><img [src]="beer.image_url" alt="" style="height: 500px; width: 200px;"></div>
+                    </div>
+                    <div class="product-grid-item-bottom">
+                        <span class="product-price">Volume: {{beer.volume.value}} L</span>
+                        <p-button (click)="toggleFavorite(beer)">Добавить &nbsp; <i *ngIf="!beer.favorite; else otherIcon" class="pi pi-star-o"></i></p-button>
+                    </div>
+                </div>
+            </div>
+            <ng-template (click)="toggleFavorite(beer)" #otherIcon><i class="pi pi-star"></i></ng-template>
+        </ng-template>
+        
+    </p-dataView>
+  </div>
+  

@@ -1,0 +1,31 @@
+<p-tabMenu [model]="items" [activeItem]="activeItem"></p-tabMenu>
+
+<p-table [value]="beers" [paginator]="true" [rows]="10">
+  <ng-template pTemplate="header">
+    <h2 class="card-title">Пивной ассортимент</h2>
+    <tr>
+      <th>В избранное</th>
+      <th>Марка</th>
+      <th>Крепость</th>
+      <th>Слоган</th>
+      <th>#</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-beers>
+    <tr>
+      <td
+        (click)="toggleFavorite(beers)"
+        *ngIf="beers.favorite; else otherIcon"
+      >
+        <i class="pi pi-star"></i>
+      </td>
+      <td [routerLink]="['/description', beers.id]">{{ beers.name }}</td>
+      <td>{{ beers.abv }}%</td>
+      <td>{{ beers.tagline }}</td>
+      <td>{{ beers.id }}</td>
+    </tr>
+    <ng-template #otherIcon
+      ><td (click)="toggleFavorite(beers)"><i class="pi pi-star-o"></i></td
+    ></ng-template>
+  </ng-template>
+</p-table>
